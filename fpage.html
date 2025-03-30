@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Playlist</title>
+    <style>
+     body {
+    background-image: url("https://cdn.wallpapersafari.com/28/20/80MWuG.png");
+    background-size: cover; /* Ensures full coverage */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+    background-attachment: fixed; /* Keeps background fixed (for desktops) */
+    width: 100%;
+    height: 100vh; /* Ensures full viewport height */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Media Query for Smaller Screens (Tablets & Mobiles) */
+@media (max-width: 768px) {
+    body {
+        background-size: cover;  /* Ensures the image covers the screen */
+        background-position: center; /* Centers the image */
+        background-attachment: scroll; /* Fixes mobile background scrolling issues */
+        min-height: 100vh;
+    }
+}
+
+/* Extra Small Screens (Phones) */
+@media (max-width: 480px) {
+    body {
+        background-size: contain;  /* Ensures the full image is visible */
+        background-position: top; /* Aligns background properly */
+    }
+}
+
+        h1 {
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+
+        .navbar a:hover {
+            background-color: red;
+            border-radius: 5px;
+        }
+
+        .menu {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 150px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 10px;
+            display: block;
+        }
+
+        /* Responsive Navbar */
+        .menu-toggle {
+            display: none;
+            font-size: 25px;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: #333;
+                position: absolute;
+                top: 50px;
+                left: 0;
+            }
+
+            .menu a {
+                text-align: center;
+                padding: 15px;
+                width: 100%;
+                display: block;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .menu.show {
+                display: flex;
+            }
+        }
+
+        /* Playlist Buttons */
+        .button {
+            display: inline-block;
+            background-color: #19181a;
+            color: white;
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: red;
+        }
+
+        /* Button Container */
+        .center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+        <div class="menu">
+            <a href="music.html">Home</a>
+            <a href="album.html">Albums</a>
+            <a href="fpage.html">Playlist</a>
+            <a href="favourites.html">Favourites</a>
+            <div class="dropdown">
+                <a href="#">More ▼</a>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Log out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Playlist Section -->
+    <h1>Your Playlists</h1>
+    <div class="center">
+        <button class="button" onclick="location.href='illayaraja.html'">Illayaraja Playlist</button>
+        <button class="button" onclick="location.href='u1drugs.html'">U1 Drugs Playlist</button>
+        <button class="button" onclick="location.href='Anirudh.html'">Anirudh Playlist</button>
+        <button class="button" onclick="location.href='Rahman.html'">A.R. Rahman Playlist</button>
+        <button class="button" onclick="location.href='music.html'" style="background-color: aqua; color: black;">Home</button>
+    </div>
+
+    <!-- JavaScript for Menu Toggle -->
+    <script>
+        function toggleMenu() {
+            document.querySelector('.menu').classList.toggle('show');
+        }
+    </script>
+
+</body>
+</html>

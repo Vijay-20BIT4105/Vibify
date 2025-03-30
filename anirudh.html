@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anirudh Songs</title>
+    <style>
+        body {
+            background-image: url("https://i.pinimg.com/originals/69/19/10/69191072760f7de5ea0222f9683b70dd.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .song-container {
+            margin: 20px auto;
+            width: 80%;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .song-title {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .progress-bar {
+            width: 300px;
+        }
+        .play-btn {
+            cursor: pointer;
+            font-size: 24px;
+        }
+        .back-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            text-decoration: none;
+            color: rgba(245, 243, 243, 0.964);
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 15px;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+<body>
+  <a href="fpage.html" class="back-btn">&#8592; BACK</a>
+    <h1>Anirudh Songs</h1>
+    <div id="playlist">
+        <!-- Songs List -->
+    </div>
+
+    <script>
+        const songs = [
+            { title: "Andha-Kanna", src: "anirudh/Andha-Kanna.mp3" },
+            { title: "Arabic-Kuthu", src: "anirudh/Arabic-Kuthu.mp3" },
+            { title: "Boomi-Enna-Suthudhe", src: "anirudh/Boomi-Enna-Suthudhe.mp3" },
+            { title: "Ethir-Neechal", src: "anirudh/Ethir-Neechal.mp3" },
+            { title: "Jimikki-Ponnu", src: "anirudh/Jimikki-Ponnu.mp3" },
+            { title: "Kalyaana-Vayasu", src: "anirudh/Kalyaana-Vayasu.mp3" },
+            { title: "Local-Boys", src: "anirudh/Local-Boys.mp3" },
+            { title: "Naa-Ready", src: "anirudh/Naa-Ready.mp3" },
+            { title: "Quit-Pannuda", src: "anirudh/Quit-Pannuda.mp3" },
+            { title: "The-Karma", src: "anirudh/The-Karma.mp3" }
+        ];
+
+        const playlist = document.getElementById('playlist');
+        let currentAudio = null;
+
+        songs.forEach((song, index) => {
+            const songDiv = document.createElement('div');
+            songDiv.classList.add('song-container');
+            songDiv.innerHTML = `
+                <div class="song-title">${song.title}</div>
+                <div class="controls">
+                    <button class="play-btn" onclick="playPause(${index})">▶️</button>
+                    <input type="range" class="progress-bar" min="0" value="0" step="0.1" onchange="seekAudio(${index}, this.value)">
+                    <span class="time">0:00 / 0:00</span>
+                </div>
+                <audio id="audio-${index}" src="${song.src}" ontimeupdate="updateProgress(${index})" onended="resetPlayer(${index})"></audio>
+            `;
+            playlist.appendChild(songDiv);
+        });
+
+        function playPause(index) {
+            const audio = document.getElementById(`audio-${index}`);
+            const playBtn = document.querySelectorAll('.play-btn')[index];
+            
+            if (currentAudio && currentAudio !== audio) {
+                currentAudio.pause();
+                const prevIndex = Array.from(document.querySelectorAll('audio')).indexOf(currentAudio);
+                document.querySelectorAll('.play-btn')[prevIndex].textContent = '▶️';
+            }
+
+            if (audio.paused) {
+                audio.play();
+                playBtn.textContent = '⏸️';
+                currentAudio = audio;
+            } else {
+                audio.pause();
+                playBtn.textContent = '▶️';
+            }
+        }
+
+        function updateProgress(index) {
+            const audio = document.getElementById(`audio-${index}`);
+            const progressBar = document.querySelectorAll('.progress-bar')[index];
+            const timeDisplay = document.querySelectorAll('.time')[index];
+            
+            progressBar.max = audio.duration;
+            progressBar.value = audio.currentTime;
+            timeDisplay.textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
+        }
+
+        function seekAudio(index, value) {
+            document.getElementById(`audio-${index}`).currentTime = value;
+        }
+
+        function resetPlayer(index) {
+            document.querySelectorAll('.play-btn')[index].textContent = '▶️';
+        }
+
+        function formatTime(seconds) {
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+    </script>
+</body>
+</html>
