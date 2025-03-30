@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibify - Music</title>
+    <style>
+        body {
+            background-image: url("https://cdn.wallpapersafari.com/28/20/80MWuG.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: aquamarine;
+            font-size: 40px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h2 {
+            color: aqua;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .button {
+            display: block;
+            border-radius: 8px;
+            background-color: aqua;
+            border: none;
+            color: black;
+            text-align: center;
+            font-size: 20px;
+            padding: 15px;
+            width: 80%;
+            max-width: 250px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 10px auto;
+            font-style: oblique;
+        }
+
+        .button:hover {
+            background-color: #00ced1;
+        }
+
+        marquee {
+            font-size: 18px;
+            color: aquamarine;
+            text-align: center;
+            display: block;
+            margin-top: 20px;
+        }
+
+        .slideshow-container {
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+            margin: auto;
+        }
+
+        .mySlides {
+            display: none;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin: 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active {
+            background-color: #717171;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+            h2 {
+                font-size: 25px;
+            }
+            .button {
+                font-size: 18px;
+                padding: 12px;
+                width: 90%;
+            }
+            .slideshow-container {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 28px;
+            }
+            h2 {
+                font-size: 22px;
+            }
+            .button {
+                font-size: 16px;
+                padding: 10px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Vibify</h1>
+
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <img src="https://e1.pxfuel.com/desktop-wallpaper/168/778/desktop-wallpaper-yuvan-thumbnail.jpg">
+        </div>
+        <div class="mySlides fade">
+            <img src="https://www.gethucinema.com/wp-content/uploads/2018/06/Anirudh-RavichanderWallpaper-live-in-paris-recent.jpg">
+        </div>
+        <div class="mySlides fade">
+            <img src="https://e1.pxfuel.com/desktop-wallpaper/396/626/desktop-wallpaper-sid-sriram-posted-by-ethan-mercado-sid-sriram-albums-thumbnail.jpg">
+        </div>
+    </div>
+
+    <div style="text-align:center; margin-top: 10px;">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>    
+
+    <h2>Home</h2>
+
+    <button class="button" onclick="location.href='album.html'"><i>Albums</i></button>
+    <button class="button" onclick="location.href='fav.html'"><i>Favourites</i></button>
+    <button class="button" onclick="location.href='fpage.html'"><i>Playlist</i></button>
+    <button class="button" style="background-color: red; color: white;" onclick="location.href='start.html'"><i>Log Out</i></button>
+
+    <marquee>Enjoy Your Songs Here!</marquee>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            setTimeout(showSlides, 2000);
+        }
+    </script>
+
+</body>
+</html>
